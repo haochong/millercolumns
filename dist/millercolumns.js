@@ -415,12 +415,19 @@ $.radio('column.item.add').subscribe(function(data) {
 
         if(len) {
             for(; i < len; i++) {
+                
+                $.radio('log').broadcast({
+                    key: moduleKey,
+                    value: ' adding ' + itemsIndex[i]
+                })
+
                 $.radio('column.item.add').broadcast({
                     parent: 0,
                     id: itemsIndex[i],
                     wrap: newWrap,
                     content: items[itemsIndex[i]].content
                 })
+
             }
         } else {
             $.radio('log').broadcast({
