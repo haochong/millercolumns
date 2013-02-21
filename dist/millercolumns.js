@@ -103,6 +103,14 @@
   else context[name] = definition()
 })('column.events', function() {
 
+var resizeTimer;
+$(window).on('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        $.radio('column.resize').broadcast()
+    }, 300);
+});
+
 $('.events-wrap').on('click', function(e) {
     var el = $(e.target)
       , eventKey = el.data('event-key')
@@ -398,6 +406,9 @@ $.radio('column.item.add').subscribe(function(data) {
         $('.column-view-wrap').css({
             width: newWidth
         })
+
+        $.radio('column.resize').broadcast()
+
         window.scrollTo(newWidth, 0)
 
         newWrap = $('.list-wrap').last()
@@ -648,3 +659,28 @@ $.radio('column.item.add').subscribe(function(data) {
     
 }, this);
 
+;(function(name, definition, context) {
+  if (typeof module != 'undefined' && module.exports) module.exports = definition()
+  else if (typeof context['define'] == 'function' && context['define']['amd']) define(name, definition)
+  else context[name] = definition()
+})('column.resize', function() {
+
+    var moduleKey = 'column.resize'
+      , wrapHeight
+
+    $.radio(moduleKey).subscribe(function(data) {
+
+        wrapHeight = $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
+
+        $('.column-view-wrap').css({
+            height: wrapHeight
+        })
+
+        $.radio('log').broadcast({
+            key: moduleKey,
+            value: ' set list-wrap height to viewport height ' + wrapHeight
+        })
+        
+    })
+
+}, this);
