@@ -18,6 +18,7 @@
         'column.item.save',
         'column.item.edit',
         'column.data.item',
+        'column.resize',
         'column.events',
     ]
 

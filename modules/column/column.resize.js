@@ -5,16 +5,19 @@
 })('column.resize', function() {
 
     var moduleKey = 'column.resize'
+      , wrapHeight
 
     $.radio(moduleKey).subscribe(function(data) {
 
+        wrapHeight = $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
+
         $('.column-view-wrap').css({
-            height: $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
+            height: wrapHeight
         })
 
         $.radio('log').broadcast({
             key: moduleKey,
-            value: ' set list-wrap height to viewport height ' + viewportHeight
+            value: ' set list-wrap height to viewport height ' + wrapHeight
         })
         
     })

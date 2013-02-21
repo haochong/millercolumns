@@ -12,7 +12,6 @@ $(window).on('resize', function() {
     }, 300);
 });
 
-
 $('.events-wrap').on('click', function(e) {
     var el = $(e.target)
       , eventKey = el.data('event-key')
