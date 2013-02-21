@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Miller Columns</title>
+    <script type="text/javascript" src="https://raw.github.com/haochong/millercolumns/master/ender.min.js"></script>
+    <link rel="stylesheet" href="https://raw.github.com/haochong/millercolumns/master/sass/css/screen.css" type="text/css" media="all" />
+</head>
+<body>
+<div id="page-wrap">
+    
+    <div class="header">
+        <h2 class="header-title">Miller Columns</h2>
+    </div><!-- .header -->
+
+    <div class="column-view-wrap events-wrap">
+    </div><!-- .column-view-wrap -->
+
+</div><!-- #page-wrap -->
+<script type="text/javascript" src="https://raw.github.com/haochong/millercolumns/master/dist/millercolumns.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+$.domReady(function(){
+
+    $.radio('column.data.item.list').broadcast({
+        id: 0,
+        callback: function(data) {
+            $.radio('column.item.list').broadcast(data)
+        }
+    })
+
+})   
+</script>
+
+</body>
+</html>
