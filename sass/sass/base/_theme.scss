@@ -1,0 +1,28 @@
+@import "compass/utilities/links/link-colors";
+
+// Main Colors
+$color-dark-black  : #000000;
+$color-black       : #383838;
+$color-light-black : #616161;
+$color-dark-gray   : #7e7e7e;
+$color-gray        : #b8b8b8;
+$color-light-gray  : #d0d0d0;
+$color-light       : #f0f0f0;
+$color-white       : #ffffff;
+
+$color-blue        : #7BA3C6;
+
+// Main Link Colors
+$color-link         : lighten(#4183C4, 3);
+$color-link-hover   : adjust-color($color-link, $lightness: 10, $saturation: 25);
+$color-link-visited : adjust-color($color-link, $hue: 80, $lightness: -4);
+$color-link-active  : adjust-color($color-link-hover, $lightness: -15);
+
+$header-height: 50px;
+$layout-padding: 10px;
+
+// Default 
+a {
+    @include link-colors($color-link, $color-link-hover, $color-link-active, $color-link-visited, $color-link-hover);
+}
+

@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 $layout-padding 0 $layout-padding;
+    height: $header-height;
+    line-height: $header-height;
+    z-index: 2;
+    background: $color-white;
+    width: 100%;
+    border-bottom: solid 1px $color-light-gray;
+    @include opacity(0.8)
+}
+.header-title {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: $color-black;
+}

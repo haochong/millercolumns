@@ -1,0 +1,44 @@
+@mixin text-overflow($width) {
+    width: #{$width};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin opacity($percent) {
+    filter: alpha(opacity=#{$percent*100}); /* ie5-7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$percent*100})"; /* ie8 */
+    -khtml-opacity: #{$percent};      /* khtml, old safari */
+    -moz-opacity: #{$percent};       /* mozilla, netscape */
+    opacity: #{$percent};           /* fx, safari, opera */
+}
+
+@mixin png-back($url) {
+    background: url(#{$url}) no-repeat;
+    _background: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=#{$url});
+}
+
+@mixin inline-block($height) {
+    display: -moz-inline-stack;
+    display: inline-block;
+    *display: inline;
+    min-height: #{$height};
+    *height: #{$height};
+    vertical-align: top;
+    zoom: 1;
+    margin: 0 0 0 0;
+    line-height: #{$height};
+}
+
+@mixin box-shadow($param) {
+    -webkit-box-shadow: #{$param};
+    -moz-box-shadow: #{$param};
+    box-shadow:  #{$param};
+}
+
+@mixin border-radius($size) {
+    -moz-border-radius: #{$size};
+    -webkit-border-radius: #{$size};
+    border-radius: #{$size};
+}
