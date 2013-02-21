@@ -46,6 +46,7 @@ $.radio('column.events.drag.bind').subscribe(function(data) {
         }
         , drag: function (el) {
             // el is dragged element
+            $('.dragging').removeClass('dragging')
             $(el).addClass('dragging')
             console.log('dragging',el);
         }

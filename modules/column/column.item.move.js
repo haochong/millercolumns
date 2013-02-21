@@ -14,7 +14,6 @@
           , toEl = data && $(data.target)
           , toWrap
 
-        $(el).removeClass('dragging')
 
         if(!fromWrap.length) {
             errorValue = 'from wrap not found'
