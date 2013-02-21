@@ -9,6 +9,7 @@ If you want to see this plugin in action, there is a [demo](http://haochong.gith
 
 * Localstorage support.
 * Redimensionable columns.
+* Drag & Drop
 
 ## Todos
 * Localstorage/Server Sync
