@@ -25,6 +25,9 @@
         $('.column-view-wrap').css({
             width: newWidth
         })
+
+        $.radio('column.resize').broadcast()
+
         window.scrollTo(newWidth, 0)
 
         newWrap = $('.list-wrap').last()

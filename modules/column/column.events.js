@@ -4,6 +4,15 @@
   else context[name] = definition()
 })('column.events', function() {
 
+var resizeTimer;
+$(window).on('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        $.radio('column.resize').broadcast()
+    }, 300);
+});
+
+
 $('.events-wrap').on('click', function(e) {
     var el = $(e.target)
       , eventKey = el.data('event-key')

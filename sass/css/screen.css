@@ -89,7 +89,7 @@ a:active {
   padding-top: 50px;
 }
 
-/* line 1, /Users/ghc/proj/millercolumns/sass/sass/partials/_header.scss */
+/* line 1, ../sass/partials/_header.scss */
 .header {
   position: fixed;
   top: 0;
@@ -114,47 +114,49 @@ a:active {
   text-align: center;
 }
 
-/* line 15, /Users/ghc/proj/millercolumns/sass/sass/partials/_header.scss */
+/* line 15, ../sass/partials/_header.scss */
 .header-title {
   font-size: 1.8em;
   font-weight: bold;
   color: #383838;
 }
 
-/* line 1, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 1, ../sass/partials/_column.scss */
 .column-view-wrap {
   float: left;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
-/* line 6, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 6, ../sass/partials/_column.scss */
 .list-wrap {
   float: left;
   width: 300px;
   height: 100%;
   border-left: solid 1px #d0d0d0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/* line 14, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 16, ../sass/partials/_column.scss */
 .item {
   position: relative;
   cursor: pointer;
 }
 
-/* line 18, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 20, ../sass/partials/_column.scss */
 .content {
   font-size: 1em;
   padding: 5px 50px 5px 10px;
 }
 
-/* line 22, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 24, ../sass/partials/_column.scss */
 .item-open, .item:hover {
   background: #383838;
   color: white;
 }
 
-/* line 26, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 28, ../sass/partials/_column.scss */
 .item:hover {
   filter: alpha(opacity=60);
   /* ie5-7 */
@@ -168,17 +170,17 @@ a:active {
   /* fx, safari, opera */
 }
 
-/* line 29, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 31, ../sass/partials/_column.scss */
 .item-edit, .item-edit:hover {
   background: none;
 }
 
-/* line 32, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 34, ../sass/partials/_column.scss */
 .item-edit-input-wrap {
   padding: 0 10px 0 10px;
 }
 
-/* line 35, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 37, ../sass/partials/_column.scss */
 .item-edit-input {
   display: block;
   font-size: 0.8em;
@@ -190,13 +192,13 @@ a:active {
   color: #7e7e7e;
 }
 
-/* line 45, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 47, ../sass/partials/_column.scss */
 .item-open-old {
   background: #d0d0d0;
   border: solid 1px #d0d0d0;
 }
 
-/* line 49, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 51, ../sass/partials/_column.scss */
 .action-wrap {
   display: none;
   position: absolute;
@@ -204,7 +206,7 @@ a:active {
   right: 10px;
 }
 
-/* line 56, /Users/ghc/proj/millercolumns/sass/sass/partials/_column.scss */
+/* line 58, ../sass/partials/_column.scss */
 .drag-enter {
   border-top: solid 1px #7ba3c6;
 }
