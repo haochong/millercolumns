@@ -1,0 +1,61 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>HuiList</title>
+    <script type="text/javascript" src="ender.min.js"></script>
+    <link rel="stylesheet" href="sassfu/css/screen.css" type="text/css" media="all" />
+</head>
+<body>
+<div id="page-wrap">
+    
+    <div class="header">
+        <h2 class="header-title">lllllllll</h2>
+    </div><!-- .header -->
+
+    <div class="column-view-wrap events-wrap">
+    </div><!-- .column-view-wrap -->
+
+    <div class="loading">
+        loading...
+    </div><!-- .loading -->
+    
+</div><!-- #page-wrap -->
+<script type="text/javascript" charset="utf-8">
+$.domReady(function(){
+
+    var debug = true;
+
+    $.radio('log').subscribe(function(data) {
+        var key = data && data.key
+        , value = data && data.value
+
+        console && console.log(key, value)
+    })
+
+    if(debug) {
+        $script.path('modules/')
+        $script(['column'], function() {
+            $.radio('log').broadcast({
+                key: 'column',
+                value: 'module loaded'
+            })
+        })
+    } else {
+        $script.path('dist/')
+        $script('huilist', function() {
+            $('.loading').hide()
+            $.radio('column.data.item.list').broadcast({
+                id: 0,
+                callback: function(data) {
+                    $.radio('column.item.list').broadcast(data)
+                }
+            })
+        })
+    }
+    
+
+})   
+</script>
+
+</body>
+</html>

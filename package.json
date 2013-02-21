@@ -1,0 +1,21 @@
+{
+  "name": "millercolumns",
+  "description": "miller columns ui",
+  "version": "1.0",
+  "homepage": "https://github.com/haochong",
+  "author": "Haochong Guo <haochong@gmail.com> (http://haochong.me)",
+  "keywords": [
+    "ender"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/haochong/millercolumns.git"
+  },
+  "devDependencies": {
+    "grunt-contrib-uglify": "~0.1.1",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0",
+    "grunt": "~0.4.0"
+  }
+}
