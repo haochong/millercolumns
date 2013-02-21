@@ -49,7 +49,7 @@
 <script type="text/javascript" charset="utf-8">
 
 $.domReady(function(){
-    while(!$.cache('column') || !$.cache('column').get('items')) {
+    while(!$.cache('column').get('items')) {
         $.radio('column.data.item.list').broadcast({
             id: "0",
             callback: function(data) {
