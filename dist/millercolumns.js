@@ -66,18 +66,22 @@
     $.radio('column.data.item.move').subscribe(function(data) {
         var moduleKey = 'column.data.item.move'
           , id = data && data.id
-          , from = data && data.from
-          , to = data && data.to
+          , fromWrap = data && data.fromWrap
+          , toWrap = data && data.toWrap
+          , toEl = data && data.toEl
 
         $.radio('log').broadcast({
             key: moduleKey,
             value: id
         })
-        itemsIndex[from].splice(itemsIndex[from].indexOf(id), 1)
-        if(!itemsIndex[to]) { 
-            itemsIndex[to] = []
+
+        itemsIndex[fromWrap].splice(itemsIndex[fromWrap].indexOf(id), 1)
+
+        if(!itemsIndex[toWrap]) { 
+            itemsIndex[toWrap] = []
         }
-        itemsIndex[to].push(id)
+
+        itemsIndex[toWrap].splice(itemsIndex[toWrap].indexOf(toEl), 0, id);
 
         updateItemCache()
     })
@@ -121,45 +125,43 @@ $.radio('column.events.drag.bind').subscribe(function(data) {
     var wrap = data && data.wrap
 
     $(wrap).dagron({
-        // all options are 'optional', no pun intended
         handle: '.handle'
         , target: '.droptarget'
         , start: function (el) {
+            // el is the item you started dragging
             if($(el).hasClass('item-open')) {
                 $.radio('column.item.close').broadcast({
                     wrap: $(el)
                 })
             }
-            // el is the item you started dragging
         }
         , drag: function (el) {
+            // el is dragged element
             $(el).addClass('dragging')
             console.log('dragging',el);
-            // el is dragged element
         }
         , drop: function (el) {
+            // el is the target the dragged item was dropped on
             $.radio('column.item.move').broadcast({
                 el: $('.dragging'),
                 target: el
             })
             console.log('drop ',el);
-            // el is the target the dragged item was dropped on
         }
         , enter: function (el) {
+            // el is the element target you entered into
             $('.drag-enter').removeClass('drag-enter')
             $(el).addClass('drag-enter')
             console.log('enter ',el);
-            // el is the element target you entered into
         }
         , leave: function (el) {
-            //$(el).removeClass('drag-enter')
-            console.log('leave ',el);
             // el is the item left from
+            console.log('leave ',el);
         }
         , end: function (el) {
+            // el is the element you stopped dragging
             console.log('end dragg ',el);
             $('.drag-enter').removeClass('drag-enter')
-            // el is the element you stopped dragging
         }
     })
 
@@ -188,7 +190,7 @@ $.radio('column.item.add').subscribe(function(data) {
     , actionWrap = '<div class="action-wrap">' + btnEditHtml + btnRemoveHtml + '</div>'
     , errorKey = 'column.item.add error'
     , contentHtml = '<div data-event-key="column.item.open" data-event-wrap=".item" class="content handle">' + content + '</div>'
-    , liClass = content ? 'item draggables' : 'item item-edit'
+    , liClass = content ? 'item draggables droptarget' : 'item item-edit droptarget'
     , liId = content ? id : require('uuid-v4')()
     , liHtml = '<li data-id="'+liId+'" class="' + liClass + '">' + contentHtml + actionWrap + '</li>'
     , errorValue
@@ -277,15 +279,23 @@ $.radio('column.item.add').subscribe(function(data) {
   else context[name] = definition()
 })('column.item.edit', function() {
 
-    $.radio('column.item.edit').subscribe(function(data) {
+    var moduleKey = 'column.item.edit'
+
+    $.radio(moduleKey).subscribe(function(data) {
         var wrap = data && data.wrap
           , editEl = wrap.find('.item-edit')
           , contentEl
           , inputHtml
           , saveItem = function(el) {
+              var itemEl = $(el)
+
+              if(!itemEl.hasClass('item-edit')) {
+                  itemEl = itemEl.closest('.item-edit')
+              }
+
               $.radio('column.item.save').broadcast({
                   wrap: $(el).closest('.list-wrap'),
-                  el: $(el).closest('.item-edit')
+                  el: itemEl
               })
           }
           , keyboardHandler = function(e) {
@@ -302,25 +312,24 @@ $.radio('column.item.add').subscribe(function(data) {
             }
 
             if(editEl) {
+
                 contentEl = editEl.find('.content')
                 inputHtml = '<div class="item-edit-input-wrap"><input class="item-edit-input" value="' + contentEl.html() + '" /></div>'
                 editEl.append(inputHtml)
-                editEl.find('.item-edit-input').on('keypress', keyboardHandler).focus().on('blur', function() {
-                    saveItem(editEl)
-                })
+                editEl.find('.item-edit-input').on('keypress', keyboardHandler).focus()
 
                 contentEl.hide()
                 editEl.find('.action-wrap').hide()
 
             } else {
                 $.radio('log').broadcast({
-                    key: 'column.item.edit error',
+                    key: moduleKey + ' error',
                     value: '.item-edit element not exist'
                 })
             }
         } else {
             $.radio('log').broadcast({
-                key: 'column.item.edit error',
+                key: moduleKey + ' error',
                 value: 'wrap not exist'
             })
         }
@@ -347,11 +356,11 @@ $.radio('column.item.add').subscribe(function(data) {
           , wrapHtml
 
         wrapHtml = '<div class="list-wrap" data-id="' + id + '">'
-        wrapHtml += '<ul class="list droptarget"></ul>'
+        wrapHtml += '<ul class="list"></ul>'
         wrapHtml += '</div></div>'
 
         $('.column-view-wrap').append(wrapHtml)
-        newWidth = $('.list-wrap').length * 300
+        newWidth = $('.list-wrap').length * 310
         $('.column-view-wrap').css({
             width: newWidth
         })
@@ -375,13 +384,13 @@ $.radio('column.item.add').subscribe(function(data) {
             })
         }
 
-        $.radio('column.events.drag.bind').broadcast({
-            wrap: newWrap.find('.draggables')
-        })
-
         $.radio('column.item.add').broadcast({
             wrap: newWrap,
             content: ''
+        })
+
+        $.radio('column.events.drag.bind').broadcast({
+            wrap: newWrap.find('.draggables')
         })
 
         $.radio('log').broadcast({
@@ -403,47 +412,41 @@ $.radio('column.item.add').subscribe(function(data) {
 
     $.radio(moduleKey).subscribe(function(data) {
         var el = data && data.el
-          , from = $(el).closest('.list-wrap')
-          , to = data && data.target
+          , fromWrap = $(el).closest('.list-wrap')
+          , toEl = data && $(data.target)
+          , toWrap
 
         $(el).removeClass('dragging')
 
-        if(!from.length) {
+        if(!fromWrap.length) {
             errorValue = 'from wrap not found'
         }
-        if(!to.length) {
-            errorValue = 'to wrap not found'
+        if(!toEl.length) {
+            errorValue = 'to el not found'
         }
 
-        if(!$(to).hasClass('list-wrap')) {
-            to = $(to).closest('.list-wrap')
+        if(!$(toEl).hasClass('list-wrap')) {
+            toWrap = $(toEl).closest('.list-wrap')
         }
 
         $.radio('log').broadcast({
             key: moduleKey + ' from',
-            value: from
+            value: fromWrap
         })
 
         $.radio('log').broadcast({
             key: moduleKey + ' to',
-            value: to
+            value: toWrap
         })
 
-        if(from.data('id') !== to.data('id')) {
-            $.radio('column.data.item.move').broadcast({
-                id: el.data('id'),
-                from: from.data('id'),
-                to: to.data('id')
-            })
+        $.radio('column.data.item.move').broadcast({
+            id: el.data('id'),
+            fromWrap: fromWrap.data('id'),
+            toEl: toEl.data('id'),
+            toWrap: toWrap.data('id')
+        })
 
-            $(el).insertBefore($(to).find('.item-edit'))
-            
-        } else {
-            $.radio('log').broadcast({
-                key: moduleKey,
-                value: 'no need to move'
-            })
-        }
+        $(el).insertBefore($(toEl))
 
         if(errorValue) {
             $.radio('log').broadcast({
@@ -468,6 +471,7 @@ $.radio('column.item.add').subscribe(function(data) {
         var wrap = data && data.wrap
           , parent = wrap.closest('.list-wrap')
           , id = wrap.data('id')
+          , itemEdit = $('.item-edit.draggables')
 
         if(wrap.hasClass('item-open') && !wrap.hasClass('item-open-old')) {
             $.radio('column.item.edit').broadcast({
@@ -478,6 +482,13 @@ $.radio('column.item.add').subscribe(function(data) {
                 value: 'click current opened item will edit it'
             })
             return
+        }
+
+        if(itemEdit.length) {
+            $.radio('column.item.save').broadcast({
+                wrap: itemEdit.closest('.list-wrap'),
+                el: itemEdit
+            })
         }
 
         $.radio('column.item.close').broadcast({
@@ -563,22 +574,27 @@ $.radio('column.item.add').subscribe(function(data) {
                       })
                   }
 
-                  input.remove()
+                  input && input.length && input.remove()
 
                   editItem.find('.content').html(value).show()
                   wrap.find('.action-wrap').show()
                   editItem.removeClass('item-edit')
                   editItem.data('id', editId)
-
-                  $.radio('column.item.add').broadcast({
-                      wrap: wrap,
-                      content: ''
-                  })
-
-              } else {
-                  $.radio('column.item.remove').broadcast({
+                  editItem.addClass('draggable')
+                  $.radio('column.events.drag.bind').broadcast({
                       wrap: editItem
                   })
+
+                  if(!wrap.find('.item-edit').length) {
+                      console.log(wrap.find('.item-edit'))
+                      $.radio('column.item.add').broadcast({
+                          wrap: wrap,
+                          content: ''
+                      })
+                  }
+                  
+
+              } else {
                   errorValue = 'input value empty'
               }
           } else {
