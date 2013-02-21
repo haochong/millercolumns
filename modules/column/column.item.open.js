@@ -34,6 +34,10 @@
             wrap: parent.find('.item-open')
         })
 
+        $.radio('column.header.set').broadcast({
+            value: wrap.find('.content').html()
+        })
+
         wrap.addClass('item-open')
 
         $.radio('column.data.item.list').broadcast({

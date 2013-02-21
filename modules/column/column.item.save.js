@@ -8,7 +8,6 @@
         var wrap = data && data.wrap
           , editItem = data && data.el
           , parent = wrap.data('id')
-          //, editItem = wrap.find('.item-edit')
           , editId = editItem.length && editItem.data('id')
           , input = editItem.length && editItem.find('.item-edit-input')
           , value = input && input.val()

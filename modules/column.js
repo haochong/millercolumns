@@ -7,6 +7,7 @@
     $script.path('modules/column/')
     
     var columnModules = [
+        'column.header.set',
         'column.item.add',
         'column.item.create',
         'column.item.remove',
