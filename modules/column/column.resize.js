@@ -12,6 +12,10 @@
         wrapHeight = $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
 
         $('.column-view-wrap').css({
+            width: $.viewport().width
+        })
+
+        $('.column-view').css({
             height: wrapHeight
         })
 

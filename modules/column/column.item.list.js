@@ -12,25 +12,25 @@
           , items = data && data.items
           , itemsIndex = data && data.itemsIndex
           , len = items && itemsIndex && itemsIndex.length
+          , columnWidth = $('.list-wrap').width()
           , i = 0
           , newWrap
-          , wrapHtml
 
-        wrapHtml = '<div class="list-wrap" data-id="' + id + '">'
-        wrapHtml += '<ul class="list"></ul>'
-        wrapHtml += '</div></div>'
+        newWrap = $('<div class="list-wrap"></div>')
+        newWrap.data('id', id)
+        newWrap.append('<ul class="list"></ul>')
+        
+        $('.column-view').append(newWrap)
 
-        $('.column-view-wrap').append(wrapHtml)
-        newWidth = $('.list-wrap').length * 310
-        $('.column-view-wrap').css({
+        newWidth = $('.list-wrap').length * columnWidth
+        $('.column-view').css({
             width: newWidth
         })
 
+        // Todo : iscroll 
+        //newWrap.scrollTo(newWidth, 0)
+
         $.radio('column.resize').broadcast()
-
-        window.scrollTo(newWidth, 0)
-
-        newWrap = $('.list-wrap').last()
 
         if(len) {
             for(; i < len; i++) {
