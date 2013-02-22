@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Miller Columns</title>
+    <script type="text/javascript" src="ender.min.js"></script>
+    <link rel="stylesheet" href="sass/css/screen.css" type="text/css" media="all" />
+    <script type="text/javascript" charset="utf-8">
+    if(!$.cache('column').get('items') || !$.cache('column').get('itemsIndex')) {
+
+        $.cache('column').set('items', {
+            "1" : { content: 'item 1' },
+            "2" : { content: 'item 2' },
+            "3" : { content: 'item 3' },
+            "1-1" : { content: "item 1-1" },
+            "1-2" : { content: "item 1-2" },
+            "1-3" : { content: "item 1-3" },
+            "1-4" : { content: "item 1-4" },
+            "2-1" : { content: "item 2-1" },
+            "2-2" : { content: "item 2-2" },
+            "2-3" : { content: "item 2-3" },
+            "2-4" : { content: "item 2-4" },
+            "3-1" : { content: "item 3-1" },
+            "3-2" : { content: "item 3-2" },
+            "3-3" : { content: "item 3-3" },
+            "3-4" : { content: "item 3-4" }
+        })
+
+        $.cache('column').set('itemsIndex', {
+            "0" : ["1","2","3"],
+            "1" : ["1-1", "1-2", "1-3", "1-4"],
+            "2" : ["2-1", "2-2", "2-3", "2-4"],
+            "3" : ["3-1", "3-2", "3-3", "2-4"]
+        })
+    }
+    </script>
+</head>
+<body>
+<div id="page-wrap">
+    
+    
+    <div class="column-view-wrap events-wrap">
+        <div class="header column-view-header">
+            <h2 class="header-title">Miller Columns</h2>
+        </div><!-- .header -->
+    </div><!-- .column-view-wrap -->
+
+</div><!-- #page-wrap -->
+<script type="text/javascript" src="dist/millercolumns.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+$.domReady(function(){
+
+    var getItems = function() {
+        $.radio('column.data.item.list').broadcast({
+            id: "0",
+            callback: function(data) {
+                if(!data.items || !data.itemsIndex) {
+                    getItems()
+                } else {
+                    $.radio('column.item.list').broadcast(data)
+                }
+            }
+        })
+    }
+
+    getItems()
+
+    
+
+})   
+</script>
+
+</body>
+</html>

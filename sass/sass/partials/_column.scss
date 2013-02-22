@@ -1,0 +1,60 @@
+.column-view-wrap {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+}
+.list-wrap {
+    float: left;
+    width: 300px;
+    height: 100%;
+    border-left: solid 1px $color-light-gray;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.list {
+}
+.item {
+    position: relative;
+    cursor: pointer;
+}
+.content {
+    font-size: 1em;
+    padding: 5px 50px 5px 10px;
+}
+.item-open, .item:hover {
+    background: $color-black;
+    color: $color-white;
+}
+.item:hover {
+    @include opacity(0.6);
+}
+.item-edit, .item-edit:hover {
+    background: none;
+}
+.item-edit-input-wrap {
+    padding: 0 10px 0 10px;
+}
+.item-edit-input {
+    display: block;
+    font-size: 0.8em;
+    width: 100%;
+    margin: 0;
+    border: none;
+    padding: 5px 0 5px 0;
+	outline: none;
+    color: $color-dark-gray;
+}
+.item-open-old {
+    background: $color-light-gray;
+    border: solid 1px $color-light-gray;
+}
+.action-wrap {
+    display: none;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.drag-enter {
+    border-top: solid 1px $color-blue;
+}
