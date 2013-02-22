@@ -678,6 +678,15 @@ $.radio('column.item.add').subscribe(function(data) {
     $.radio(moduleKey).subscribe(function(data) {
 
         wrapHeight = $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
+        viewportWidth = $.viewport().width
+
+        if(!$.viewport() || !viewportWidth.width) {
+            $.radio('log').broadcast({
+                key: moduleKey,
+                value: '',
+                error: 'viewport width error ' + viewportWidth
+            })
+        }
 
         $('.column-view-wrap').css({
             width: $.viewport().width
