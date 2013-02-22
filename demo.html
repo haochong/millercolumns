@@ -51,6 +51,24 @@
 
 $.domReady(function(){
 
+    $.radio('log').subscribe(function(data) {
+        var key = data && data.key
+        , value = data && data.value
+        , error = data && data.error 
+
+        if(console) {
+            if(error) {
+                console.error(key, error)
+            } else {
+                console.log(key,value)
+            }
+        } else {
+            if(debug) {
+                alert(error)
+            }
+        }
+    })
+
     var getItems = function() {
         $.radio('column.data.item.list').broadcast({
             id: "0",
