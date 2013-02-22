@@ -680,7 +680,7 @@ $.radio('column.item.add').subscribe(function(data) {
         wrapHeight = $.viewport().height - $('.column-view-header').height() - $('.column-view-footer').height()
         viewportWidth = $.viewport().width
 
-        if(!$.viewport() || !viewportWidth.width) {
+        if(!$.viewport() || !viewportWidth) {
             $.radio('log').broadcast({
                 key: moduleKey,
                 value: '',
