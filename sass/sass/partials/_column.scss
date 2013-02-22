@@ -1,7 +1,11 @@
 .column-view-wrap {
     float: left;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
+}
+.column-view {
+    float: left;
+    height: 100%;
 }
 .list-wrap {
     float: left;

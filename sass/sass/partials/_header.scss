@@ -1,19 +1,15 @@
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0 $layout-padding 0 $layout-padding;
-    height: $header-height;
-    line-height: $header-height;
-    z-index: 2;
-    background: $color-white;
+    position: relative;
     width: 100%;
+    background: $color-white;
+    height: $header-height;
     border-bottom: solid 1px $color-light-gray;
     @include opacity(0.8);
-    text-align: center;
 }
 .header-title {
-    font-size: 1.8em;
-    font-weight: bold;
+    position: absolute;
+    top: $layout-padding;
+    left: $layout-padding;
     color: $color-black;
+    font-size: 1.8em;
 }

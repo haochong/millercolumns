@@ -84,22 +84,12 @@ a:active {
   color: #1c7edf;
 }
 
-/* line 1, ../sass/base/_layout.scss */
-#page-wrap {
-  padding-top: 50px;
-}
-
 /* line 1, ../sass/partials/_header.scss */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 0 10px 0 10px;
-  height: 50px;
-  line-height: 50px;
-  z-index: 2;
-  background: white;
+  position: relative;
   width: 100%;
+  background: white;
+  height: 50px;
   border-bottom: solid 1px #d0d0d0;
   filter: alpha(opacity=80);
   /* ie5-7 */
@@ -111,24 +101,31 @@ a:active {
   /* mozilla, netscape */
   opacity: 0.8;
   /* fx, safari, opera */
-  text-align: center;
 }
 
-/* line 15, ../sass/partials/_header.scss */
+/* line 9, ../sass/partials/_header.scss */
 .header-title {
-  font-size: 1.8em;
-  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
   color: #383838;
+  font-size: 1.8em;
 }
 
 /* line 1, ../sass/partials/_column.scss */
 .column-view-wrap {
   float: left;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* line 6, ../sass/partials/_column.scss */
+.column-view {
+  float: left;
+  height: 100%;
+}
+
+/* line 10, ../sass/partials/_column.scss */
 .list-wrap {
   float: left;
   width: 300px;
@@ -138,26 +135,26 @@ a:active {
   overflow-x: hidden;
 }
 
-/* line 16, ../sass/partials/_column.scss */
+/* line 20, ../sass/partials/_column.scss */
 .item {
   position: relative;
   cursor: pointer;
 }
 
-/* line 20, ../sass/partials/_column.scss */
+/* line 24, ../sass/partials/_column.scss */
 .content {
   font-size: 1em;
   padding: 0 10px 0 10px;
   line-height: 1.5em;
 }
 
-/* line 25, ../sass/partials/_column.scss */
+/* line 29, ../sass/partials/_column.scss */
 .item-open, .item:hover {
   background: #383838;
   color: white;
 }
 
-/* line 29, ../sass/partials/_column.scss */
+/* line 33, ../sass/partials/_column.scss */
 .item:hover {
   filter: alpha(opacity=60);
   /* ie5-7 */
@@ -171,17 +168,17 @@ a:active {
   /* fx, safari, opera */
 }
 
-/* line 32, ../sass/partials/_column.scss */
+/* line 36, ../sass/partials/_column.scss */
 .item-edit, .item-edit:hover {
   background: none;
 }
 
-/* line 35, ../sass/partials/_column.scss */
+/* line 39, ../sass/partials/_column.scss */
 .item-edit-input-wrap {
   padding: 0 10px 0 10px;
 }
 
-/* line 38, ../sass/partials/_column.scss */
+/* line 42, ../sass/partials/_column.scss */
 .item-edit-input {
   display: block;
   font-size: 0.8em;
@@ -193,13 +190,13 @@ a:active {
   color: #7e7e7e;
 }
 
-/* line 48, ../sass/partials/_column.scss */
+/* line 52, ../sass/partials/_column.scss */
 .item-open-old {
   background: #d0d0d0;
   border: solid 1px #d0d0d0;
 }
 
-/* line 52, ../sass/partials/_column.scss */
+/* line 56, ../sass/partials/_column.scss */
 .action-wrap {
   display: none;
   position: absolute;
@@ -207,7 +204,7 @@ a:active {
   right: 10px;
 }
 
-/* line 59, ../sass/partials/_column.scss */
+/* line 63, ../sass/partials/_column.scss */
 .drag-enter {
   border-top: solid 1px #7ba3c6;
 }
