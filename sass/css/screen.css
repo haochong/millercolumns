@@ -147,16 +147,17 @@ a:active {
 /* line 20, ../sass/partials/_column.scss */
 .content {
   font-size: 1em;
-  padding: 5px 50px 5px 10px;
+  padding: 0 10px 0 10px;
+  line-height: 1.5em;
 }
 
-/* line 24, ../sass/partials/_column.scss */
+/* line 25, ../sass/partials/_column.scss */
 .item-open, .item:hover {
   background: #383838;
   color: white;
 }
 
-/* line 28, ../sass/partials/_column.scss */
+/* line 29, ../sass/partials/_column.scss */
 .item:hover {
   filter: alpha(opacity=60);
   /* ie5-7 */
@@ -170,17 +171,17 @@ a:active {
   /* fx, safari, opera */
 }
 
-/* line 31, ../sass/partials/_column.scss */
+/* line 32, ../sass/partials/_column.scss */
 .item-edit, .item-edit:hover {
   background: none;
 }
 
-/* line 34, ../sass/partials/_column.scss */
+/* line 35, ../sass/partials/_column.scss */
 .item-edit-input-wrap {
   padding: 0 10px 0 10px;
 }
 
-/* line 37, ../sass/partials/_column.scss */
+/* line 38, ../sass/partials/_column.scss */
 .item-edit-input {
   display: block;
   font-size: 0.8em;
@@ -192,13 +193,13 @@ a:active {
   color: #7e7e7e;
 }
 
-/* line 47, ../sass/partials/_column.scss */
+/* line 48, ../sass/partials/_column.scss */
 .item-open-old {
   background: #d0d0d0;
   border: solid 1px #d0d0d0;
 }
 
-/* line 51, ../sass/partials/_column.scss */
+/* line 52, ../sass/partials/_column.scss */
 .action-wrap {
   display: none;
   position: absolute;
@@ -206,7 +207,7 @@ a:active {
   right: 10px;
 }
 
-/* line 58, ../sass/partials/_column.scss */
+/* line 59, ../sass/partials/_column.scss */
 .drag-enter {
   border-top: solid 1px #7ba3c6;
 }
