@@ -28,8 +28,19 @@ $.domReady(function(){
     $.radio('log').subscribe(function(data) {
         var key = data && data.key
         , value = data && data.value
+        , error = data && data.error 
 
-        console && console.log(key, value)
+        if(console) {
+            if(error) {
+                console.error(key, error)
+            } else {
+                console.log(key,value)
+            }
+        } else {
+            if(debug) {
+                alert(error)
+            }
+        }
     })
 
     if(debug) {
@@ -42,7 +53,7 @@ $.domReady(function(){
         })
     } else {
         $script.path('dist/')
-        $script('huilist', function() {
+        $script('millercolumns', function() {
             $('.loading').hide()
             $.radio('column.data.item.list').broadcast({
                 id: 0,
