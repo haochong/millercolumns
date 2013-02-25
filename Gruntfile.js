@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: { name: 'millercolumns' },
     concat: {
       options: {
         separator: ';'
@@ -33,19 +33,35 @@ module.exports = function(grunt) {
         }
       }
     },
+    compass: {
+        dist: {
+            options: {
+                sassDir: 'sass/sass',
+                cssDir: 'sass/css'
+            }
+        }
+    },
     watch: {
-      files: ['<%= jshint.files %>'],
-      tasks: ['jshint']
+        compass: {
+            files: ['sass/**/*.scss'],
+            tasks: ['compass']
+        },
+        concat: {
+            files: ['modules/column/*.js'],
+            tasks: ['concat', 'uglify']
+        }
     }
+    
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   grunt.registerTask('test', ['jshint']);
   grunt.registerTask('build', ['concat', 'uglify']);
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['concat', 'uglify', 'watch']);
 
 };

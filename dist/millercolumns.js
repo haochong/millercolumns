@@ -132,6 +132,7 @@ $('.events-wrap').on('click', function(e) {
 $.radio('column.events.drag.bind').subscribe(function(data) {
     var wrap = data && data.wrap
 
+    //TODO : IE compatible drag & drop
     $(wrap).dagron({
         handle: '.handle'
         , target: '.droptarget'
@@ -270,7 +271,6 @@ $.radio('column.item.add').subscribe(function(data) {
 
     var moduleKey = 'column.item.close'
 
-    // TODO : close item
     $.radio(moduleKey).subscribe(function(data) {
         var wrap = data && data.wrap
           , parent = wrap.closest('.list-wrap')

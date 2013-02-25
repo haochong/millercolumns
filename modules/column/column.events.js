@@ -33,6 +33,7 @@ $('.events-wrap').on('click', function(e) {
 $.radio('column.events.drag.bind').subscribe(function(data) {
     var wrap = data && data.wrap
 
+    //TODO : IE compatible drag & drop
     $(wrap).dagron({
         handle: '.handle'
         , target: '.droptarget'

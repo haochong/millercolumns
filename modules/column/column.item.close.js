@@ -6,7 +6,6 @@
 
     var moduleKey = 'column.item.close'
 
-    // TODO : close item
     $.radio(moduleKey).subscribe(function(data) {
         var wrap = data && data.wrap
           , parent = wrap.closest('.list-wrap')
